@@ -10,7 +10,15 @@ import thunk from 'redux-thunk';
 const store = createStore(
     combineReducers(reducers),
     {
-        
+        from: '杭州',
+        to: '上海',
+        isCitySelectorVisible: false,
+        currentSelectingLeftCity: false,
+        cityData: null,
+        isLoadingCityData: false,
+        isDateSelectorVisible: false,
+        departDate: Date.now(),
+        highSpeed: false,
     },
     applyMiddleware(thunk)
 )
