@@ -8,11 +8,14 @@ import './App.css';
 
 import Header from '../common/Header.jsx';
 import DepartDate from './DepartDate.jsx';
-import HeightSpeed from './HeightSpeed.jsx';
+import HighSpeed from './HighSpeed.jsx';
 import Journey from './Journey.jsx';
 import Submit from './Submit.jsx';
 
 import CitySelector from '../common/CitySelector.jsx';
+import DateSelector from '../common/DateSelector.jsx';
+
+import { h0 } from '../common/fp';
 
 // 引入的是action createtor，执行之后返回的是对象形式的action，需要dispatch才能生效
 import {
@@ -21,7 +24,10 @@ import {
     hideCitySelector,
     fetchCityData,
     setSelectedCity,
-    showDateSelector
+    showDateSelector,
+    hideDateSelector,
+    setDepartDate,
+    toggleHighSpeed
 } from './actions'
 
 function App(props) {
@@ -29,8 +35,10 @@ function App(props) {
         from,
         to,
         isCitySelectorVisible,
+        isDateSelectorVisible,
         cityData,
         isLoadingCityData,
+        highSpeed,
         dispatch,
         departDate
     } = props;
@@ -69,12 +77,42 @@ function App(props) {
         }, dispatch)
     }, [])
 
+    const dateSelectorCbs = useMemo(() => {
+        return bindActionCreators(
+            {
+                onBack: hideDateSelector,
+            },
+            dispatch
+        );
+    }, []);
+
+    const highSpeedCbs = useMemo(() => {
+        return bindActionCreators(
+            {
+                toggle: toggleHighSpeed
+            },
+            dispatch
+        )
+    }, [])
+
+    const onSelectDate = useCallback((day) => {
+        if (!day) {
+            return;
+        }
+        if (day < h0()) {
+            return;
+        }
+
+        dispatch(setDepartDate(day));
+        dispatch(hideDateSelector());
+    }, [])
+
     return (
         <div>
             <div className="header-wrapper">
                 <Header title="火车票" onBack={onBack} />
             </div>
-            <form action="" className="form">
+            <form action="./query.html" className="form">
                 <Journey
                     from={from}
                     to={to}
@@ -84,7 +122,10 @@ function App(props) {
                     time={departDate}
                     {...departDateCbs}
                 />
-                <HeightSpeed />
+                <HighSpeed
+                    {...highSpeedCbs}
+                    highSpeed={highSpeed}
+                />
                 <Submit />
             </form>
             <CitySelector
@@ -92,6 +133,11 @@ function App(props) {
                 cityData={cityData}
                 isLoadingCityData={isLoadingCityData}
                 {...citySelectorCbs}
+            />
+            <DateSelector
+                show={isDateSelectorVisible}
+                {...dateSelectorCbs}
+                onSelect={onSelectDate}
             />
         </div>
     )
