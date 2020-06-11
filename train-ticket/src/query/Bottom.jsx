@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback, useMemo, useReducer } from 'react';
+import React, { memo, useState, useMemo, useReducer } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -228,7 +228,7 @@ const BottomModal = memo(function BottomModal(props) {
                         </span>
                     </div>
                     <div className="options">
-                    {
+                        {
                         optionGroup.map(group => {
                             return (
                                 <Option {...group} key={group.title}/>
