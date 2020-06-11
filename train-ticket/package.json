@@ -78,7 +78,6 @@
       "react-app"
     ],
     "rules": {
-      "no-console": "off",
       "react/jsx-indent": [
         "error",
         4
@@ -167,6 +166,7 @@
   "devDependencies": {
     "husky": "^4.2.5",
     "lint-staged": "^10.2.9",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "webpack-bundle-analyzer": "^3.8.0"
   }
 }
