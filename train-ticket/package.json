@@ -70,7 +70,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "format": "eslint src/**/*.{jsx,js} --fix"
+    "format": "prettier src/**/*.{js,jsx,css,md} --write && eslint src/**/*.{jsx,js} --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -92,7 +92,12 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
+      "prettier --write",
       "eslint --fix",
+      "git add"
+    ],
+    "*.{css,md}": [
+      "prettier --write",
       "git add"
     ]
   },
@@ -161,6 +166,7 @@
   },
   "devDependencies": {
     "husky": "^4.2.5",
-    "lint-staged": "^10.2.9"
+    "lint-staged": "^10.2.9",
+    "prettier": "^2.0.5"
   }
 }

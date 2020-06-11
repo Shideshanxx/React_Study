@@ -1,12 +1,8 @@
-import React from 'react';
-import './Journey.css';
+import React from "react";
+import "./Journey.css";
 
 function Journey(props) {
-    return (
-        <div>
-            
-        </div>
-    )
+  return <div></div>;
 }
 
 export default Journey;
