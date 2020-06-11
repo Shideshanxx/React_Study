@@ -159,7 +159,7 @@ const BottomModal = memo(function BottomModal(props) {
             title: '到达车站',
             options: arriveStations,
             checkedMap: localCheckedArriveStations,
-            displ: localCheckedArriveStationsDispatch
+            dispatch: localCheckedArriveStationsDispatch
         }
     ]
 
